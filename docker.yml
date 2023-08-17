@@ -1,0 +1,26 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  build:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ ssecrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t venkateshnadagouda654/docker1 .
+          docker push venkateshnadagouda654/docker1
